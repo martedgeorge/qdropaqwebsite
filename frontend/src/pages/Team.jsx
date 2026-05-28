@@ -34,7 +34,7 @@ export default function Team() {
         <div className="container-quiet grid grid-cols-1 md:grid-cols-2 gap-12">
           {team.map((m, i) => (
             <FadeIn key={m.name} delay={i * 80}>
-              <article data-testid={`team-member-${i}`}>
+              <article data-testid={`team-member-${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
                 <img
                   src={m.img}
                   alt={m.name}

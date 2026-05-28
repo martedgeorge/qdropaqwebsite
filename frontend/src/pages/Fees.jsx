@@ -36,16 +36,16 @@ export default function Fees() {
                 <div>Fee</div>
                 <div className="hidden md:block">Notes</div>
               </div>
-              {fees.map((f, i) => (
+              {fees.map((f) => (
                 <div
                   key={f.svc}
-                  data-testid={`fee-row-${i}`}
+                  data-testid={`fee-row-${f.svc.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
                   style={{
                     padding: "1.4rem 1.6rem",
                     display: "grid",
                     gridTemplateColumns: "2fr 1fr 2fr",
                     gap: 16,
-                    borderBottom: i < fees.length - 1 ? "1px solid var(--cream-line)" : "none",
+                    borderBottom: f !== fees[fees.length - 1] ? "1px solid var(--cream-line)" : "none",
                     alignItems: "baseline",
                   }}
                 >
@@ -67,8 +67,8 @@ export default function Fees() {
           <FadeIn>
             <div className="eyebrow" style={{ marginBottom: "1rem" }}>Forms</div>
             <ul className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "var(--cream-line)" }}>
-              {forms.map(([f, d], i) => (
-                <li key={f} data-testid={`form-${i}`} style={{ background: "var(--ivory)", padding: "1.8rem", listStyle: "none" }}>
+              {forms.map(([f, d]) => (
+                <li key={f} data-testid={`form-${f.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} style={{ background: "var(--ivory)", padding: "1.8rem", listStyle: "none" }}>
                   <div style={{ fontFamily: "Newsreader, Georgia, serif", fontSize: "1.1rem", color: "var(--ink)", marginBottom: "0.4rem" }}>{f}</div>
                   <div style={{ fontSize: "0.9rem", color: "var(--ink-mute)" }}>{d}</div>
                 </li>

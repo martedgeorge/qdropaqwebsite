@@ -57,7 +57,7 @@ export default function Process() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "var(--cream-line)" }}>
             {steps.map((s, i) => (
               <FadeIn key={s.n} delay={i * 50}>
-                <div data-testid={`process-step-${i}`} style={{ background: "var(--ivory)", padding: "2.2rem 1.8rem", height: "100%" }}>
+                <div data-testid={`process-step-${s.n}`} style={{ background: "var(--ivory)", padding: "2.2rem 1.8rem", height: "100%" }}>
                   <div className="numeral" style={{ marginBottom: "1rem" }}>{s.n}</div>
                   <h3
                     style={{

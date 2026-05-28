@@ -57,7 +57,7 @@ export default function Unique() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "var(--cream-line)" }}>
             {points.map((d, i) => (
               <FadeIn key={d.n} delay={i * 50}>
-                <div data-testid={`unique-${i}`} style={{ background: "var(--ivory)", padding: "2.2rem 1.8rem", height: "100%" }}>
+                <div data-testid={`unique-${d.n}`} style={{ background: "var(--ivory)", padding: "2.2rem 1.8rem", height: "100%" }}>
                   <div className="numeral" style={{ marginBottom: "1rem" }}>{d.n}</div>
                   <h3
                     style={{
