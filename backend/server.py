@@ -11,6 +11,8 @@ from typing import List, Dict, Any, Optional
 import uuid
 from datetime import datetime, timezone
 
+from email_service import send_intake_emails, send_primer_email
+
 
 ROOT_DIR: Path = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -101,13 +103,19 @@ async def submit_intake(payload: IntakeCreate) -> Intake:
     obj = Intake(**payload.model_dump())
     await db.intakes.insert_one(_to_doc(obj))
     logger.info("Intake received: %s (%s)", obj.email, obj.id)
+    # Best-effort email; never blocks the persistence path.
+    try:
+        await send_intake_emails(_to_doc(obj))
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Intake email dispatch failed for %s: %s", obj.id, exc)
     return obj
 
 
 @api_router.post("/primer-leads", response_model=PrimerLead, status_code=201)
 async def request_primer(payload: PrimerLeadCreate) -> PrimerLead:
     """Request the Plan Pre-Qualification Primer PDF — captures email + optional role."""
-    # Light de-dup: if the same email already requested, don't create a second row.
+    # Light de-dup: if the same email already requested, don't create a second row
+    # AND don't re-send the email.
     existing = await db.primer_leads.find_one({"email": payload.email}, {"_id": 0})
     if existing:
         if isinstance(existing.get('requested_at'), str):
@@ -116,6 +124,10 @@ async def request_primer(payload: PrimerLeadCreate) -> PrimerLead:
     obj = PrimerLead(**payload.model_dump())
     await db.primer_leads.insert_one(_to_doc(obj))
     logger.info("Primer lead captured: %s (%s)", obj.email, obj.id)
+    try:
+        await send_primer_email(_to_doc(obj))
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Primer email dispatch failed for %s: %s", obj.id, exc)
     return obj
 
 
