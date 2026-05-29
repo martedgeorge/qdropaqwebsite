@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import FadeIn from "@/components/FadeIn";
 import { TEAM_PANEL_IMAGE_HEIGHT, REVEAL_STAGGER_BASE } from "@/constants/ui";

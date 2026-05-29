@@ -29,7 +29,7 @@ export default function useInView({ delay = 0 } = {}) {
     });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay]);
+  }, [delay, setVisible]);
 
   return { ref, visible };
 }

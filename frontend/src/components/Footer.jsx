@@ -1,4 +1,3 @@
-import React from "react";
 import FooterBrand from "@/components/footer/FooterBrand";
 import { FooterColumn, FooterEstablishedBlurb } from "@/components/footer/FooterColumn";
 import FooterBottomBar from "@/components/footer/FooterBottomBar";

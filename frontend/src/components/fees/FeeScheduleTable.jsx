@@ -1,4 +1,3 @@
-import React from "react";
 
 const HEADER_STYLE = {
   borderBottom: "1px solid var(--cream-line)",

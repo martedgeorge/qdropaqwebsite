@@ -1,4 +1,3 @@
-import React from "react";
 import { FOOTER_BLURB_MAX_WIDTH } from "@/constants/ui";
 
 export default function FooterBrand() {

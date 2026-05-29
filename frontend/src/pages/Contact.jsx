@@ -1,4 +1,3 @@
-import React from "react";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import { Mail, Phone, MapPin } from "lucide-react";

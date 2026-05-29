@@ -1,4 +1,3 @@
-import React from "react";
 
 // Plain "title + body" tile used inside Services and other simple grids.
 export default function FeatureCard({ title, body, testid }) {

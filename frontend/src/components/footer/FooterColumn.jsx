@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const TEXT_COLOR = "#D9D8D2";

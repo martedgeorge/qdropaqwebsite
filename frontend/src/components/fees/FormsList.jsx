@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const idFor = (f) => `form-${f.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;

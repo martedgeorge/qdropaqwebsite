@@ -1,4 +1,3 @@
-import React from "react";
 import useInView from "@/hooks/useInView";
 
 // Gentle, restrained reveal — opacity + 8px translate, single pass, no springs.

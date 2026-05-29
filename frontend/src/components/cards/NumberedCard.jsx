@@ -1,4 +1,3 @@
-import React from "react";
 
 // A numbered tile used by Differentiators, Process, Unique. Single small primitive
 // keeps every "card with a numeral + heading + paragraph" consistent.

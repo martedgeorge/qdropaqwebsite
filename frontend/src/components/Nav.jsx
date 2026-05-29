@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { NAV_HEIGHT, NAV_ICON_SIZE, SCROLL_SHADOW_THRESHOLD } from "@/constants/ui";

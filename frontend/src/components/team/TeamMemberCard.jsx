@@ -1,4 +1,3 @@
-import React from "react";
 import { TEAM_MEMBER_IMAGE_HEIGHT } from "@/constants/ui";
 
 export default function TeamMemberCard({ name, role, bio, img, testid }) {

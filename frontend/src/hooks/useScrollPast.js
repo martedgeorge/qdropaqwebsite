@@ -13,7 +13,7 @@ export default function useScrollPast(threshold) {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [threshold]);
+  }, [threshold, setPast]);
 
   return past;
 }

@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function ContactTile({ icon, label, value, href, hint, testid }) {
   const Inner = (

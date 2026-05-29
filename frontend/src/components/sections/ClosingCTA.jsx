@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, PhoneCall } from "lucide-react";
 import FadeIn from "@/components/FadeIn";

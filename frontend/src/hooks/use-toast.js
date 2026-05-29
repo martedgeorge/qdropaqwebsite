@@ -122,9 +122,9 @@ function toast({
 function useToast() {
   const [state, setState] = React.useState(memoryState)
 
-  // `listeners` is a module-level array; pushing into it is the listener-subscription
-  // pattern. setState is stable. Subscribing once on mount is intentional.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // `listeners` is a module-level array (constant ref) and `setState` is the stable
+  // React setter; both are safe to list as deps. `index` is local to cleanup and not
+  // an outer-scope reference. Subscription should run exactly once on mount.
   React.useEffect(() => {
     listeners.push(setState)
     return () => {
@@ -133,7 +133,7 @@ function useToast() {
         listeners.splice(index, 1)
       }
     };
-  }, [])
+  }, [setState])
 
   return {
     ...state,
