@@ -3,40 +3,60 @@
 @tailwind utilities;
 
 :root {
-    /* Warm ivory background, deep slate ink, muted bronze accent */
-    --ivory: #F5F0E6;
-    --ivory-soft: #FAF6EE;
-    --paper: #FBF8F2;
-    --cream-line: #E6DECB;
-    --ink: #1E2A37;
-    --ink-soft: #3A4754;
-    --ink-mute: #6B7480;
-    --bronze: #8A6A3B;
-    --bronze-deep: #6E5328;
-    --sage: #4A6B5C;
-    --sage-soft: #DCE3DC;
+    /* QDROPAQ brand palette: purple + bright orange, grounded with navy */
+    --purple: #5B21B6;
+    --purple-deep: #3B1678;
+    --purple-soft: #EEE7FF;
 
-    /* Shadcn-style tokens overridden to match palette */
-    --background: 38 40% 93%;
-    --foreground: 210 30% 17%;
-    --card: 38 50% 97%;
-    --card-foreground: 210 30% 17%;
-    --popover: 38 50% 97%;
-    --popover-foreground: 210 30% 17%;
-    --primary: 210 30% 17%;
-    --primary-foreground: 38 50% 97%;
-    --secondary: 38 30% 88%;
-    --secondary-foreground: 210 30% 17%;
-    --muted: 38 25% 90%;
-    --muted-foreground: 215 12% 45%;
-    --accent: 14 55% 46%;
-    --accent-foreground: 38 50% 97%;
-    --destructive: 0 60% 45%;
-    --destructive-foreground: 38 50% 97%;
-    --border: 36 30% 80%;
-    --input: 36 30% 80%;
-    --ring: 14 55% 46%;
-    --radius: 0.25rem;
+    --orange: #FF6A00;
+    --orange-deep: #D95700;
+    --orange-soft: #FFF0E4;
+
+    --navy: #0F172A;
+    --navy-soft: #1E293B;
+
+    --ivory: #F7F3EA;
+    --ivory-soft: #FFFCF7;
+    --paper: #FFFFFF;
+    --cream-line: #E8DED0;
+
+    --ink: #0F172A;
+    --ink-soft: #334155;
+    --ink-mute: #64748B;
+
+    --teal: #14B8A6;
+    --teal-soft: #E0FFFA;
+
+    /* Shadcn-style tokens */
+    --background: 36 38% 94%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 263 70% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 24 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 36 35% 92%;
+    --muted-foreground: 215 16% 42%;
+
+    --accent: 24 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 33 28% 83%;
+    --input: 33 28% 83%;
+    --ring: 263 70% 42%;
+
+    --radius: 0.35rem;
 }
 
 @layer base {
