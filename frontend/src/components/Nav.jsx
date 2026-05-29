@@ -2,27 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { NAV_HEIGHT, NAV_ICON_SIZE, SCROLL_SHADOW_THRESHOLD } from "@/constants/ui";
+import useScrollPast from "@/hooks/useScrollPast";
 import BrandMark from "@/components/nav/BrandMark";
 import { DesktopNavLinks, DesktopCta, MobileMenu } from "@/components/nav/NavLinks";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const scrolled = useScrollPast(SCROLL_SHADOW_THRESHOLD);
+  const { pathname } = useLocation();
 
-  // Close menu when route changes. `setOpen` is a stable useState setter (React docs)
-  // and intentionally omitted from the dep array.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { setOpen(false); }, [location.pathname]);
-
-  // Shadow on scroll. `onScroll`, `setScrolled`, and the module-level threshold
-  // constant are all stable; this effect is intentionally mount-only.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > SCROLL_SHADOW_THRESHOLD);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // Close menu on route change. `setOpen` is a stable React setter.
+  useEffect(() => { setOpen(false); }, [pathname, setOpen]);
 
   return (
     <header

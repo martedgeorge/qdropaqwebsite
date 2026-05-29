@@ -1,33 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { INTERSECTION_THRESHOLD, INTERSECTION_ROOT_MARGIN } from "@/constants/ui";
+import React from "react";
+import useInView from "@/hooks/useInView";
 
 // Gentle, restrained reveal — opacity + 8px translate, single pass, no springs.
 export default function FadeIn({ children, delay = 0, as: Tag = "div", className = "" }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  // Observer setup runs once per `delay` value. All other referenced symbols
-  // (IntersectionObserver, INTERSECTION_* constants, local `el`/`obs`/`entry`)
-  // are either globals or scoped inside the effect and are intentionally not in deps.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => setVisible(true), delay);
-            obs.unobserve(el);
-          }
-        });
-      },
-      { threshold: INTERSECTION_THRESHOLD, rootMargin: INTERSECTION_ROOT_MARGIN }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [delay]);
-
+  const { ref, visible } = useInView({ delay });
   return (
     <Tag ref={ref} className={`fade-in ${visible ? "is-visible" : ""} ${className}`}>
       {children}
