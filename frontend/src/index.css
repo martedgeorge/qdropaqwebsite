@@ -93,9 +93,9 @@
         text-decoration: none;
     }
     ::selection {
-        background: var(--bronze);
-        color: var(--ivory-soft);
-    }
+    background: var(--purple);
+    color: var(--white);
+}
 }
 
 /* Typographic scale — deliberately restrained */
