@@ -12,47 +12,42 @@ Refine the existing "Loveable" QDROPAQ preview into a more mature, trustworthy, 
 ## Architecture
 - React 19 SPA via react-router-dom 7 (BrowserRouter)
 - Tailwind + custom CSS variables for the warm-neutral palette
-- Subtle reveal via IntersectionObserver (`/src/components/FadeIn.jsx`) — opacity + 8px translate, no springs
-- Font stack: **Newsreader** (editorial serif headings) + **Mulish** (restrained body)
-- Palette: ivory `#F5F0E6`, paper `#FBF8F2`, deep slate ink `#1E2A37`, muted bronze `#8A6A3B`, cream hairlines
+- IntersectionObserver via `useInView` custom hook
+- Scroll watcher via `useScrollPast` custom hook
+- Per-route SEO via `useDocumentMeta` custom hook
+- API client via axios in `src/lib/api.js`
+- Backend: FastAPI + Motor (async MongoDB)
 
 ## Pages Implemented
-- `/` Home — hero (smaller display sizes), credibility stats bar, services grid, philosophy quote, "what sets us apart" numbered cards, team panel, dark calm CTA
-- `/about` — practice background, by-the-numbers card
-- `/our-process` — six-step considered sequence (intake → plan acceptance)
-- `/unique` — six differentiation points
-- `/fees-and-forms` — flat $495 fee schedule + forms list
-- `/who-we-are` — Carol Owen + Mark K. Altschuler profiles + philosophy card
-- `/getting-started` — multi-field intake form with success state
-- `/contact` — phone / email / mail / jurisdictions tiles + a Carol quote
-- `/articles/what-is-a-qdro` — long-form explainer
+- `/` Home — hero, stats bar, services, philosophy quote, differentiators, team panel, **Primer lead-magnet**, dark closing CTA
+- `/about`, `/our-process`, `/unique`, `/fees-and-forms`, `/who-we-are`, `/getting-started`, `/contact`, `/articles/what-is-a-qdro`
+- All routes have route-specific `<title>` and `meta description`
 
-## Shared Chrome
-- `Nav` (sticky, blur background, mobile menu, active-link bronze underline)
-- `Footer` (deep ink, four-column, address + phone + email from qdropaq.com)
-- `PageHeader` (consistent eyebrow + display headline + lede + hairline)
+## Backend Endpoints
+- `GET /api/` — health string
+- `POST /api/intake` — accepts `{name, email, phone?, state?, role?, matter?, notes?}`, validates EmailStr, persists to MongoDB `intakes` collection, returns 201 + Intake object
+- `POST /api/primer-leads` — captures `{email, role?}` for the Plan Pre-Qualification Primer PDF, persists to `primer_leads`, **idempotent**: a repeat submission with the same email returns the same id
+- `POST /api/status`, `GET /api/status` — legacy template endpoints preserved
 
-## What Was Reduced
-- Headline scale: H1 ≈ 38–58px (clamp), no 80px+ display
-- Removed gradients entirely (solid ivory + paper + ink)
-- Removed all motion except a single gentle fade-in pass
-- Removed "QDROs done with care, not assembly-line speed" promotional voice → measured, advisory tone
-
-## What Was Increased
-- Whitespace (5–6rem section padding, 1180px container)
-- Hairline dividers + cream borders instead of cards
-- Asymmetric, left-aligned reading flow
-- Quiet typography (italic serif accents, uppercase bronze eyebrows)
+## Recent Adds (this session)
+- Wired `/getting-started` intake form to `POST /api/intake` with loading / error states
+- Built `PrimerLeadMagnet` section on the home page — calm "quiet reading" panel + lead capture form bound to `POST /api/primer-leads`
+- `useDocumentMeta` hook + per-route titles & descriptions for all 9 pages
+- `CookieConsent` banner — dismissible, persists to `localStorage` (`qdropaq.cookieConsent='accepted'`)
+- Bulk-removed unused `import React` from 41 files (React 19 + CRA 5 use automatic JSX runtime)
+- Split toast reducer into per-action handlers
+- Extracted reusable card primitives (`NumberedCard`, `FeatureCard`)
 
 ## Implemented Dates
-- 2026-01: full refinement pass, all 9 pages built, palette + type system set up
+- 2026-01: full refinement pass, all 9 pages, palette + type system
+- 2026-01: code-quality refactor passes 2–5 (component decomposition, magic-number constants, custom hooks, cleanup)
+- 2026-01: backend intake + primer-leads endpoints, lead-magnet, SEO meta, cookie consent. 100% backend + frontend tests pass.
 
 ## Backlog / Next
-- P1: Wire intake form to backend `/api/intake` (currently captures and shows success state client-side only)
-- P1: Add real Carol Owen + Mark K. Altschuler photographs once provided (Unsplash placeholders in use)
-- P2: Add a small "Resources / Articles" index page (single article exists)
-- P2: SEO meta tags per route (react-helmet) and Open Graph image
-- P2: Cookie banner (qdropaq.com has one)
+- P2: send the Primer PDF for real (currently captures the lead and acknowledges; PDF delivery is TBD — e.g. via SendGrid or a static URL email)
+- P2: tighten CORS — backend currently uses `*` with `allow_credentials=True`, which is invalid per spec but currently latent (frontend doesn't send credentials)
+- P2: real Carol Owen + Mark K. Altschuler photos (Unsplash placeholders in use)
+- P3: Open Graph image and Twitter card meta
 
 ## Smart Enhancement Suggestion
-A short PDF "Plan-Pre-Qualification Primer" gated by email could turn warm visitors into qualified intakes — and quietly build a list for the family-law attorneys and mediators who refer the largest share of QDROPAQ's work.
+The Primer lead-magnet is live and will quietly grow a list of pro se petitioners, mediators, and family-law attorneys. Next obvious step: a one-page **"What to ask your plan administrator" companion sheet** — same conversion mechanic, distinct value, builds a richer subscriber profile.
