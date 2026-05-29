@@ -1,53 +1,76 @@
-# QDROPAQ — Refined Marketing Site
+# QDROPAQ — Refined Marketing Site & Lead Pipeline
 
 ## Original Problem Statement
-Refine the existing "Loveable" QDROPAQ preview into a more mature, trustworthy, professional version that better reflects the nature of pension valuations and QDRO drafting. Keep navigation/structure/flow; reduce headline sizes, gradients, animation, promotional energy; increase trust, credibility, whitespace, restraint. Use accurate content from qdropaq.com (30+ years, 40,000+ valuations and QDROs, flat $495 QDRO fee, Carol Owen as principal, Mark K. Altschuler as actuary).
-
-## User Choices Captured
-- Aesthetic: **Quiet modern** (warm neutrals, slate ink, restrained sans-serif, calm/editorial)
-- Animation: **Very subtle** (gentle fade-ins on scroll only)
-- Content: **Refined/tightened** to sound established and reassuring
-- Imagery: **Professional photography** (advisors / offices)
+Refine the existing "Loveable" QDROPAQ preview into a more mature, trustworthy, professional version that reflects the nature of pension valuations and QDRO drafting (30+ years; 40,000+ valuations & QDROs; flat $495 fee; Carol Owen principal; Mark K. Altschuler actuary).
 
 ## Architecture
-- React 19 SPA via react-router-dom 7 (BrowserRouter)
-- Tailwind + custom CSS variables for the warm-neutral palette
-- IntersectionObserver via `useInView` custom hook
-- Scroll watcher via `useScrollPast` custom hook
-- Per-route SEO via `useDocumentMeta` custom hook
-- API client via axios in `src/lib/api.js`
+- React 19 SPA via react-router-dom 7
+- Tailwind + custom CSS variables (warm ivory / slate / bronze palette)
+- IntersectionObserver via `useInView` hook; scroll watcher via `useScrollPast`; per-route SEO via `useDocumentMeta`
+- API client (axios) in `src/lib/api.js`
 - Backend: FastAPI + Motor (async MongoDB)
+- Resend transactional email integration (graceful no-op when no API key)
+- Token-gated admin dashboard
 
-## Pages Implemented
-- `/` Home — hero, stats bar, services, philosophy quote, differentiators, team panel, **Primer lead-magnet**, dark closing CTA
-- `/about`, `/our-process`, `/unique`, `/fees-and-forms`, `/who-we-are`, `/getting-started`, `/contact`, `/articles/what-is-a-qdro`
-- All routes have route-specific `<title>` and `meta description`
+## Public Pages
+`/`, `/about`, `/our-process`, `/unique`, `/fees-and-forms`, `/who-we-are`, `/getting-started`, `/contact`, `/articles/what-is-a-qdro`
+
+## Operator Pages
+`/admin` — token-gated dashboard with three tabs: Intakes, Primer leads, Companion leads. Token stored in sessionStorage.
 
 ## Backend Endpoints
-- `GET /api/` — health string
-- `POST /api/intake` — accepts `{name, email, phone?, state?, role?, matter?, notes?}`, validates EmailStr, persists to MongoDB `intakes` collection, returns 201 + Intake object
-- `POST /api/primer-leads` — captures `{email, role?}` for the Plan Pre-Qualification Primer PDF, persists to `primer_leads`, **idempotent**: a repeat submission with the same email returns the same id
-- `POST /api/status`, `GET /api/status` — legacy template endpoints preserved
+**Public**
+- `GET /api/` — health
+- `POST /api/intake` — client intake form
+- `POST /api/primer-leads` — Plan Pre-Qualification Primer lead-magnet (idempotent by email)
+- `POST /api/companion-leads` — "What to ask your plan administrator" companion sheet (idempotent by email)
 
-## Recent Adds (this session)
-- Wired `/getting-started` intake form to `POST /api/intake` with loading / error states
-- Built `PrimerLeadMagnet` section on the home page — calm "quiet reading" panel + lead capture form bound to `POST /api/primer-leads`
-- `useDocumentMeta` hook + per-route titles & descriptions for all 9 pages
-- `CookieConsent` banner — dismissible, persists to `localStorage` (`qdropaq.cookieConsent='accepted'`)
-- Bulk-removed unused `import React` from 41 files (React 19 + CRA 5 use automatic JSX runtime)
-- Split toast reducer into per-action handlers
-- Extracted reusable card primitives (`NumberedCard`, `FeatureCard`)
+**Admin (Bearer ADMIN_TOKEN)**
+- `GET /api/admin/me` — token check
+- `GET /api/admin/intakes` — list all intakes (newest first)
+- `GET /api/admin/primer-leads` — list all primer signups
+- `GET /api/admin/companion-leads` — list all companion signups
+
+## Email Service (`/app/backend/email_service.py`)
+Three calm, brand-matched HTML templates fired non-blocking via `asyncio.to_thread`:
+- Intake → firm notification (with Reply-To set to client)
+- Intake → client acknowledgement
+- Primer subscriber → PDF download link (BCC firm)
+- Companion subscriber → PDF download link (BCC firm)
+
+All send failures are caught and logged; the API endpoints always return 201 on successful persistence.
+
+## SEO
+- `useDocumentMeta` hook sets `<title>`, meta description, full Open Graph block (`og:title`, `og:description`, `og:type`, `og:image`, `og:site_name`, `og:url`), Twitter card meta (`summary_large_image`), and canonical URL per route
+- `public/index.html` has sensible site-wide defaults
+
+## Cookie Consent
+Dismissible banner stored in localStorage (`qdropaq.cookieConsent='accepted'`)
+
+## Forms On Site
+Real QDROPAQ fillable request PDFs surfaced on `/fees-and-forms`:
+- QDRO Fillable Request Form
+- Pension Valuation Fillable Request Form
+
+## Env Vars (`/app/backend/.env`)
+- `MONGO_URL`, `DB_NAME`, `CORS_ORIGINS` — required
+- `RESEND_API_KEY`, `SENDER_EMAIL`, `FIRM_EMAIL` — email delivery
+- `PRIMER_PDF_URL`, `COMPANION_PDF_URL` — lead-magnet PDF links (optional)
+- `PUBLIC_SITE_URL` — used in primer footer
+- `ADMIN_TOKEN` — operator console access
 
 ## Implemented Dates
-- 2026-01: full refinement pass, all 9 pages, palette + type system
-- 2026-01: code-quality refactor passes 2–5 (component decomposition, magic-number constants, custom hooks, cleanup)
-- 2026-01: backend intake + primer-leads endpoints, lead-magnet, SEO meta, cookie consent. 100% backend + frontend tests pass.
+- 2026-01: refinement pass, all 9 public pages, palette + type system
+- 2026-01: code-quality decomposition passes 2–6
+- 2026-01: backend intake + primer-leads endpoints, lead-magnet, SEO meta, cookie consent — 100% test pass
+- 2026-01: Resend email integration (graceful), real QDROPAQ PDFs wired
+- 2026-01: admin console, companion lead-magnet, OG + Twitter card meta
 
-## Backlog / Next
-- P2: send the Primer PDF for real (currently captures the lead and acknowledges; PDF delivery is TBD — e.g. via SendGrid or a static URL email)
-- P2: tighten CORS — backend currently uses `*` with `allow_credentials=True`, which is invalid per spec but currently latent (frontend doesn't send credentials)
-- P2: real Carol Owen + Mark K. Altschuler photos (Unsplash placeholders in use)
-- P3: Open Graph image and Twitter card meta
+## Backlog
+- Provide `RESEND_API_KEY` to activate live email sending
+- Provide final Primer + Companion PDF URLs when ready
+- DNS records to verify qdropaq.com as a Resend sending domain (SPF, DKIM x2, DMARC)
+- Real Carol Owen + Mark K. Altschuler photographs (Unsplash placeholders in use)
 
-## Smart Enhancement Suggestion
-The Primer lead-magnet is live and will quietly grow a list of pro se petitioners, mediators, and family-law attorneys. Next obvious step: a one-page **"What to ask your plan administrator" companion sheet** — same conversion mechanic, distinct value, builds a richer subscriber profile.
+## Smart Next Enhancement
+Once the two PDFs are in the wild, the highest-leverage move is a **monthly "Carol's Notes" email** to the combined list — one short, plainly written piece on a real-world QDRO question. Builds trust, keeps the list warm, and turns a static referral list into a soft pipeline.

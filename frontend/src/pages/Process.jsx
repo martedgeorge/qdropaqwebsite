@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import NumberedCard from "@/components/cards/NumberedCard";
+import CompanionLeadMagnet from "@/components/sections/CompanionLeadMagnet";
 import useDocumentMeta from "@/hooks/useDocumentMeta";
 
 const STEPS = [
@@ -80,6 +81,7 @@ export default function Process() {
           </div>
         </div>
       </section>
+      <CompanionLeadMagnet />
     </main>
   );
 }

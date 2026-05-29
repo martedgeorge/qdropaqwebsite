@@ -220,3 +220,41 @@ async def send_primer_email(lead: dict) -> None:
         bcc=[firm] if firm else None,
         reply_to=firm or None,
     )
+
+
+# ─────────────── Companion sheet email ───────────────
+async def send_companion_email(lead: dict) -> None:
+    """Send the 'What to ask your plan administrator' companion sheet."""
+    pdf_url = _cfg("COMPANION_PDF_URL")
+    firm = _cfg("FIRM_EMAIL")
+
+    download_block = ""
+    if pdf_url:
+        download_block = (
+            f'<p style="margin:18px 0 0 0;">'
+            f'<a href="{escape(pdf_url)}" '
+            f'style="display:inline-block;background:{PALETTE["ink"]};color:{PALETTE["ivory"]};'
+            f'text-decoration:none;padding:12px 22px;border-radius:2px;'
+            f'font-family:Arial,Helvetica,sans-serif;font-size:14px;letter-spacing:0.01em;">'
+            f'Download the companion sheet (PDF)</a></p>'
+        )
+    else:
+        download_block = (
+            f'<p style="margin:18px 0 0 0;color:{PALETTE["ink_mute"]};font-size:14px;">'
+            f'(The companion sheet is being finalised. We have your address and will email it the moment it is ready.)</p>'
+        )
+
+    body = f"""
+    <p style="margin:0 0 14px 0;">Thank you for asking for the companion sheet.</p>
+    <p style="margin:0 0 14px 0;">It is a single-page reference of the exact questions to put to a plan administrator before a QDRO is finalised — written so a pro se party, attorney, or mediator can use it directly in a call or letter.</p>
+    {download_block}
+    <p style="margin:24px 0 0 0;">If you would like Carol to walk through it with you, just reply.</p>
+    <p style="margin:24px 0 0 0;font-family:Georgia,serif;font-style:italic;color:{PALETTE['ink_mute']};">— QDROPAQ</p>
+    """
+    await _send(
+        to=[lead.get("email")],
+        subject="Your companion sheet: what to ask your plan administrator",
+        html=_wrap(body, preheader="A single-page reference of plan-administrator questions."),
+        bcc=[firm] if firm else None,
+        reply_to=firm or None,
+    )

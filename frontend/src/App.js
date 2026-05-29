@@ -13,6 +13,7 @@ import Team from "@/pages/Team";
 import GettingStarted from "@/pages/GettingStarted";
 import Contact from "@/pages/Contact";
 import Article from "@/pages/Article";
+import Admin from "@/pages/Admin";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/articles/what-is-a-qdro" element={<Article />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />

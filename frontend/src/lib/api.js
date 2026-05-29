@@ -11,6 +11,7 @@ const api = axios.create({
 
 export const submitIntake = (payload) => api.post("/intake", payload).then((r) => r.data);
 export const requestPrimer = (payload) => api.post("/primer-leads", payload).then((r) => r.data);
+export const requestCompanion = (payload) => api.post("/companion-leads", payload).then((r) => r.data);
 
 // Helper to surface a clean error message from a FastAPI 422 response.
 export const friendlyError = (err) => {

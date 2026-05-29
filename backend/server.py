@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Header
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -11,7 +11,7 @@ from typing import List, Dict, Any, Optional
 import uuid
 from datetime import datetime, timezone
 
-from email_service import send_intake_emails, send_primer_email
+from email_service import send_intake_emails, send_primer_email, send_companion_email
 
 
 ROOT_DIR: Path = Path(__file__).parent
@@ -61,6 +61,17 @@ class PrimerLeadCreate(BaseModel):
 
 
 class PrimerLead(PrimerLeadCreate):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    requested_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class CompanionLeadCreate(BaseModel):
+    """Lead-magnet sign-up for the 'What to ask your plan administrator' companion sheet."""
+    email: EmailStr
+    role: Optional[str] = Field(default=None, max_length=80)
+
+
+class CompanionLead(CompanionLeadCreate):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     requested_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
@@ -129,6 +140,79 @@ async def request_primer(payload: PrimerLeadCreate) -> PrimerLead:
     except Exception as exc:  # noqa: BLE001
         logger.error("Primer email dispatch failed for %s: %s", obj.id, exc)
     return obj
+
+
+@api_router.post("/companion-leads", response_model=CompanionLead, status_code=201)
+async def request_companion(payload: CompanionLeadCreate) -> CompanionLead:
+    """Request the companion sheet — captures email + optional role, idempotent by email."""
+    existing = await db.companion_leads.find_one({"email": payload.email}, {"_id": 0})
+    if existing:
+        if isinstance(existing.get('requested_at'), str):
+            existing['requested_at'] = datetime.fromisoformat(existing['requested_at'])
+        return CompanionLead(**existing)
+    obj = CompanionLead(**payload.model_dump())
+    await db.companion_leads.insert_one(_to_doc(obj))
+    logger.info("Companion lead captured: %s (%s)", obj.email, obj.id)
+    try:
+        await send_companion_email(_to_doc(obj))
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Companion email dispatch failed for %s: %s", obj.id, exc)
+    return obj
+
+
+# ───────────────────────── Admin (token-gated) ─────────────────────────
+def _require_admin(authorization: Optional[str]) -> None:
+    """Constant-time check of a single shared admin token. Not a user-account system.
+
+    Header format: `Authorization: Bearer <ADMIN_TOKEN>`
+    """
+    token = (os.environ.get("ADMIN_TOKEN") or "").strip()
+    if not token:
+        raise HTTPException(status_code=503, detail="Admin access is not configured.")
+    if not authorization or not authorization.lower().startswith("bearer "):
+        raise HTTPException(status_code=401, detail="Missing bearer token.")
+    presented = authorization.split(" ", 1)[1].strip()
+    # Constant-time compare to avoid timing attacks
+    import hmac
+    if not hmac.compare_digest(presented, token):
+        raise HTTPException(status_code=401, detail="Invalid token.")
+
+
+@api_router.get("/admin/me")
+async def admin_me(authorization: Optional[str] = Header(default=None)) -> Dict[str, str]:
+    """Cheap endpoint to verify a token from the frontend before showing the dashboard."""
+    _require_admin(authorization)
+    return {"status": "ok"}
+
+
+@api_router.get("/admin/intakes")
+async def list_intakes(
+    authorization: Optional[str] = Header(default=None),
+    limit: int = 200,
+) -> List[Dict[str, Any]]:
+    _require_admin(authorization)
+    rows = await db.intakes.find({}, {"_id": 0}).sort("submitted_at", -1).to_list(limit)
+    return rows
+
+
+@api_router.get("/admin/primer-leads")
+async def list_primer_leads(
+    authorization: Optional[str] = Header(default=None),
+    limit: int = 200,
+) -> List[Dict[str, Any]]:
+    _require_admin(authorization)
+    rows = await db.primer_leads.find({}, {"_id": 0}).sort("requested_at", -1).to_list(limit)
+    return rows
+
+
+@api_router.get("/admin/companion-leads")
+async def list_companion_leads(
+    authorization: Optional[str] = Header(default=None),
+    limit: int = 200,
+) -> List[Dict[str, Any]]:
+    _require_admin(authorization)
+    rows = await db.companion_leads.find({}, {"_id": 0}).sort("requested_at", -1).to_list(limit)
+    return rows
 
 
 # Validation error → 422 by default; convert pydantic errors to a quieter shape
