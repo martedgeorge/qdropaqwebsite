@@ -4,7 +4,6 @@ export const NAV_LINKS = [
   { to: "/our-process", label: "Process" },
   { to: "/unique", label: "What Makes Us Different" },
   { to: "/fees-and-forms", label: "Fees & Forms" },
-  { to: "/who-we-are", label: "Who We Are" },
   { to: "/contact", label: "Contact" },
 ];
 
