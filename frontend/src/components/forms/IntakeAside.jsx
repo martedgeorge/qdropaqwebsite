@@ -62,6 +62,20 @@ export function IntakeContactAside() {
           No phone trees. No paralegal triage. You will speak with the specialist
           who would handle your matter.
         </p>
+        <p
+          style={{
+            marginTop: "1.4rem",
+            paddingTop: "1.2rem",
+            borderTop: "1px solid var(--cream-line)",
+            fontSize: "0.88rem",
+            color: "var(--ink-mute)",
+          }}
+        >
+          Prefer paper?{" "}
+          <Link to="/fees-and-forms" data-testid="start-forms-link" className="link-quiet">
+            Use our fillable request PDFs →
+          </Link>
+        </p>
       </div>
     </FadeIn>
   );

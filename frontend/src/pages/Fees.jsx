@@ -12,9 +12,16 @@ const FEES = [
 ];
 
 const FORMS = [
-  ["Intake Questionnaire", "PDF · completed at the start of every matter"],
-  ["Plan Information Form", "PDF · for use when contacting the plan administrator"],
-  ["Sample Engagement Letter", "PDF · the terms of our engagement"],
+  {
+    label: "QDRO Fillable Request Form",
+    note: "Used to open a new QDRO drafting matter — participant, alternate payee, plan, and decree details.",
+    href: "https://customer-assets.emergentagent.com/job_qdropaq-established/artifacts/m4bw985m_QDROPAQ-QDRO-Fillable-Request-Form.pdf",
+  },
+  {
+    label: "Pension Valuation Fillable Request Form",
+    note: "Used when you need a defined-benefit pension valued for settlement, mediation, or equitable distribution.",
+    href: "https://customer-assets.emergentagent.com/job_qdropaq-established/artifacts/essxbxca_QDROPAQ-Valuation-Fillable-Request-Form.pdf",
+  },
 ];
 
 export default function Fees() {
