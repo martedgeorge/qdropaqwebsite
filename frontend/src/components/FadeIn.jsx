@@ -6,6 +6,10 @@ export default function FadeIn({ children, delay = 0, as: Tag = "div", className
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
+  // Observer setup runs once per `delay` value. All other referenced symbols
+  // (IntersectionObserver, INTERSECTION_* constants, local `el`/`obs`/`entry`)
+  // are either globals or scoped inside the effect and are intentionally not in deps.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const el = ref.current;
     if (!el) return;

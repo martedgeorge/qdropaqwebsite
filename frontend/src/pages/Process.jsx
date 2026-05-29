@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
+import NumberedCard from "@/components/cards/NumberedCard";
 
-const steps = [
+const STEPS = [
   {
     n: "01",
     h: "Intake & document review",
@@ -42,6 +43,8 @@ const steps = [
   },
 ];
 
+const STAGGER = 50;
+
 export default function Process() {
   return (
     <main data-testid="page-process">
@@ -51,30 +54,20 @@ export default function Process() {
         lede="Every file moves through the same six considered steps. Each is handled personally — and each exists to reduce the cost, delay, and rework that follow when a QDRO is filed before the plan has reviewed it."
         testid="process-header"
       />
-
       <section style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
         <div className="container-quiet">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "var(--cream-line)" }}>
-            {steps.map((s, i) => (
-              <FadeIn key={s.n} delay={i * 50}>
-                <div data-testid={`process-step-${s.n}`} style={{ background: "var(--ivory)", padding: "2.2rem 1.8rem", height: "100%" }}>
-                  <div className="numeral" style={{ marginBottom: "1rem" }}>{s.n}</div>
-                  <h3
-                    style={{
-                      fontFamily: "Newsreader, Georgia, serif",
-                      fontSize: "1.2rem",
-                      color: "var(--ink)",
-                      marginBottom: "0.6rem",
-                    }}
-                  >
-                    {s.h}
-                  </h3>
-                  <p style={{ fontSize: "0.97rem" }}>{s.p}</p>
-                </div>
+            {STEPS.map((s, i) => (
+              <FadeIn key={s.n} delay={i * STAGGER}>
+                <NumberedCard
+                  numeral={s.n}
+                  heading={s.h}
+                  body={s.p}
+                  testid={`process-step-${s.n}`}
+                />
               </FadeIn>
             ))}
           </div>
-
           <div style={{ marginTop: "3rem" }}>
             <Link to="/getting-started" data-testid="process-cta" className="btn-primary">
               Begin Intake

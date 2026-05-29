@@ -10,10 +10,14 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Close menu when route changes
+  // Close menu when route changes. `setOpen` is a stable useState setter (React docs)
+  // and intentionally omitted from the dep array.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { setOpen(false); }, [location.pathname]);
 
-  // Shadow on scroll
+  // Shadow on scroll. `onScroll`, `setScrolled`, and the module-level threshold
+  // constant are all stable; this effect is intentionally mount-only.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > SCROLL_SHADOW_THRESHOLD);
     window.addEventListener("scroll", onScroll, { passive: true });

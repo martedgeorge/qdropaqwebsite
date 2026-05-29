@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
+import NumberedCard from "@/components/cards/NumberedCard";
 
-const points = [
+const POINTS = [
   {
     n: "01",
     h: "One specialist, one file",
@@ -42,6 +43,8 @@ const points = [
   },
 ];
 
+const STAGGER = 50;
+
 export default function Unique() {
   return (
     <main data-testid="page-unique">
@@ -51,30 +54,21 @@ export default function Unique() {
         lede="The market for QDRO services is full of high-volume providers and law firms that outsource the work. QDROPAQ has stayed deliberately small for thirty years — because pensions, marriages, and the families they support deserve a more careful hand."
         testid="unique-header"
       />
-
       <section style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
         <div className="container-quiet">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "var(--cream-line)" }}>
-            {points.map((d, i) => (
-              <FadeIn key={d.n} delay={i * 50}>
-                <div data-testid={`unique-${d.n}`} style={{ background: "var(--ivory)", padding: "2.2rem 1.8rem", height: "100%" }}>
-                  <div className="numeral" style={{ marginBottom: "1rem" }}>{d.n}</div>
-                  <h3
-                    style={{
-                      fontFamily: "Newsreader, Georgia, serif",
-                      fontSize: "1.15rem",
-                      color: "var(--ink)",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    {d.h}
-                  </h3>
-                  <p style={{ fontSize: "0.95rem" }}>{d.p}</p>
-                </div>
+            {POINTS.map((d, i) => (
+              <FadeIn key={d.n} delay={i * STAGGER}>
+                <NumberedCard
+                  numeral={d.n}
+                  heading={d.h}
+                  body={d.p}
+                  headingSize="1.15rem"
+                  testid={`unique-${d.n}`}
+                />
               </FadeIn>
             ))}
           </div>
-
           <div style={{ marginTop: "3rem", display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link to="/our-process" data-testid="unique-cta-process" className="btn-ghost">Our Process</Link>
             <Link to="/getting-started" data-testid="unique-cta-start" className="btn-primary">Begin Intake</Link>

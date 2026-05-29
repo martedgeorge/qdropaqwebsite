@@ -135,6 +135,9 @@ function toast({
 function useToast() {
   const [state, setState] = React.useState(memoryState)
 
+  // `listeners` is a module-level array; pushing into it is the listener-subscription
+  // pattern. setState is stable. Subscribing once on mount is intentional.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     listeners.push(setState)
     return () => {
