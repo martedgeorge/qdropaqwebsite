@@ -9,7 +9,6 @@ import About from "@/pages/About";
 import Process from "@/pages/Process";
 import Unique from "@/pages/Unique";
 import Fees from "@/pages/Fees";
-import Team from "@/pages/Team";
 import GettingStarted from "@/pages/GettingStarted";
 import Contact from "@/pages/Contact";
 import Article from "@/pages/Article";
