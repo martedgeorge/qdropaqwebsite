@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import NumberedCard from "@/components/cards/NumberedCard";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 
 const POINTS = [
   {
@@ -45,6 +46,11 @@ const POINTS = [
 const STAGGER = 50;
 
 export default function Unique() {
+  useDocumentMeta({
+    title: "What Makes Us Different",
+    description:
+      "A small practice, by design. Six things that set QDROPAQ apart from high-volume QDRO providers and outsourcing law firms.",
+  });
   return (
     <main data-testid="page-unique">
       <PageHeader

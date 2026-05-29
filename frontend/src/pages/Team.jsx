@@ -2,6 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import TeamMemberCard from "@/components/team/TeamMemberCard";
 import TeamPhilosophyCard from "@/components/team/TeamPhilosophyCard";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 import { REVEAL_STAGGER_BASE } from "@/constants/ui";
 
 const TEAM = [
@@ -24,6 +25,11 @@ const TEAM = [
 const testIdFor = (name) => `team-member-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
 export default function Team() {
+  useDocumentMeta({
+    title: "Who We Are",
+    description:
+      "Carol Owen, Principal, and Mark K. Altschuler, Actuary — the two specialists who lead every QDROPAQ engagement.",
+  });
   return (
     <main data-testid="page-team">
       <PageHeader

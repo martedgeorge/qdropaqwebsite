@@ -16,7 +16,7 @@ const MATTER_OPTIONS = [
   "Unsure — would like guidance",
 ];
 
-export default function IntakeForm({ form, onChange, onSubmit }) {
+export default function IntakeForm({ form, onChange, onSubmit, submitting = false, error = "" }) {
   return (
     <form onSubmit={onSubmit} data-testid="intake-form" className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -55,13 +55,37 @@ export default function IntakeForm({ form, onChange, onSubmit }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-3 pt-2">
-        <button type="submit" data-testid="intake-submit" className="btn-primary">
-          Send intake
+        <button
+          type="submit"
+          data-testid="intake-submit"
+          className="btn-primary"
+          disabled={submitting}
+          style={submitting ? { opacity: 0.65, cursor: "wait" } : undefined}
+        >
+          {submitting ? "Sending…" : "Send intake"}
         </button>
         <span style={{ fontSize: "0.85rem", color: "var(--ink-mute)" }}>
           We respond within one business day.
         </span>
       </div>
+
+      {error && (
+        <div
+          role="alert"
+          data-testid="intake-error"
+          style={{
+            marginTop: "0.6rem",
+            padding: "0.85rem 1rem",
+            background: "#FBEDE6",
+            border: "1px solid #E8C6B5",
+            borderRadius: 2,
+            fontSize: "0.92rem",
+            color: "#7A2E10",
+          }}
+        >
+          {error}
+        </div>
+      )}
     </form>
   );
 }

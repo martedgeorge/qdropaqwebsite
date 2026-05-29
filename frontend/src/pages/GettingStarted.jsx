@@ -3,6 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import IntakeForm from "@/components/forms/IntakeForm";
 import { IntakeSuccess, IntakeContactAside } from "@/components/forms/IntakeAside";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
+import { submitIntake, friendlyError } from "@/lib/api";
 
 const INITIAL_FORM = {
   name: "",
@@ -15,11 +17,40 @@ const INITIAL_FORM = {
 };
 
 export default function GettingStarted() {
+  useDocumentMeta({
+    title: "Getting Started",
+    description:
+      "Tell us a little about your matter. A short, confidential intake before any conversation — and no commitment.",
+  });
+
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState(INITIAL_FORM);
 
   const change = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const onSubmit = (e) => { e.preventDefault(); setSubmitted(true); };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSubmitting(true);
+    try {
+      await submitIntake({
+        ...form,
+        // Strip empty optional fields so EmailStr/Optional rules are clean
+        phone: form.phone || undefined,
+        state: form.state || undefined,
+        role: form.role || undefined,
+        matter: form.matter || undefined,
+        notes: form.notes || undefined,
+      });
+      setSubmitted(true);
+    } catch (err) {
+      setError(friendlyError(err));
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <main data-testid="page-getting-started">
@@ -37,7 +68,13 @@ export default function GettingStarted() {
               <IntakeSuccess />
             ) : (
               <FadeIn>
-                <IntakeForm form={form} onChange={change} onSubmit={onSubmit} />
+                <IntakeForm
+                  form={form}
+                  onChange={change}
+                  onSubmit={onSubmit}
+                  submitting={submitting}
+                  error={error}
+                />
               </FadeIn>
             )}
           </div>

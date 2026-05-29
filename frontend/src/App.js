@@ -3,6 +3,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Process from "@/pages/Process";
@@ -40,6 +41,7 @@ function App() {
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />
+        <CookieConsent />
       </BrowserRouter>
     </div>
   );

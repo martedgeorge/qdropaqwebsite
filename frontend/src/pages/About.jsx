@@ -2,9 +2,15 @@ import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import AboutNarrative from "@/components/about/AboutNarrative";
 import ByTheNumbersCard from "@/components/about/ByTheNumbersCard";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 import { REVEAL_STAGGER_BASE } from "@/constants/ui";
 
 export default function About() {
+  useDocumentMeta({
+    title: "About",
+    description:
+      "QDROPAQ has prepared pension valuations and Qualified Domestic Relations Orders since 1995 — 40,000+ matters, custom-calculated and custom-drafted.",
+  });
   return (
     <main data-testid="page-about">
       <PageHeader

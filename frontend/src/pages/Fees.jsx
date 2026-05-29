@@ -2,6 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import FeeScheduleTable from "@/components/fees/FeeScheduleTable";
 import FormsList from "@/components/fees/FormsList";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 
 const FEES = [
   { svc: "QDRO Drafting (per plan)", price: "$495", note: "Flat fee. Includes plan pre-qualification." },
@@ -17,6 +18,11 @@ const FORMS = [
 ];
 
 export default function Fees() {
+  useDocumentMeta({
+    title: "Fees & Forms",
+    description:
+      "Flat $495 QDRO drafting fee. Plain pricing for pension valuations and pre-qualifications. No retainer creep.",
+  });
   return (
     <main data-testid="page-fees">
       <PageHeader

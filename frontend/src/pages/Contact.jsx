@@ -3,6 +3,7 @@ import FadeIn from "@/components/FadeIn";
 import { Mail, Phone, MapPin } from "lucide-react";
 import ContactTile from "@/components/contact/ContactTile";
 import CarolNoteCard from "@/components/contact/CarolNoteCard";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 import { CONTACT_ICON_SIZE, REVEAL_STAGGER_BASE } from "@/constants/ui";
 
 const TILES = [
@@ -39,6 +40,11 @@ const TILES = [
 ];
 
 export default function Contact() {
+  useDocumentMeta({
+    title: "Contact",
+    description:
+      "Reach Carol Owen directly at 215-782-9847 or carol@qdropaq.com. No phone trees, no triage line.",
+  });
   return (
     <main data-testid="page-contact">
       <PageHeader

@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import ArticleBody from "@/components/article/ArticleBody";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 
 export default function Article() {
+  useDocumentMeta({
+    title: "What is a QDRO?",
+    description:
+      "A plain-English explainer on Qualified Domestic Relations Orders — what they do, why qualification matters, and where QDROPAQ fits in.",
+  });
   return (
     <main data-testid="page-article">
       <PageHeader

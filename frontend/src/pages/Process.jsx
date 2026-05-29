@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
 import NumberedCard from "@/components/cards/NumberedCard";
+import useDocumentMeta from "@/hooks/useDocumentMeta";
 
 const STEPS = [
   {
@@ -45,6 +46,11 @@ const STEPS = [
 const STAGGER = 50;
 
 export default function Process() {
+  useDocumentMeta({
+    title: "Our Process",
+    description:
+      "Six considered steps from intake to plan acceptance. Plan-first drafting, pre-qualification, and personal follow-through.",
+  });
   return (
     <main data-testid="page-process">
       <PageHeader
