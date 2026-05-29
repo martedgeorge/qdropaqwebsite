@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import { Download } from "lucide-react";
-
-const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+import FormDownloadCard from "@/components/fees/FormDownloadCard";
 
 export default function FormsList({ items }) {
   return (
@@ -11,58 +9,7 @@ export default function FormsList({ items }) {
         style={{ background: "var(--cream-line)" }}
       >
         {items.map((f) => (
-          <li
-            key={f.label}
-            data-testid={`form-${slug(f.label)}`}
-            style={{
-              background: "var(--ivory)",
-              padding: "1.8rem",
-              listStyle: "none",
-            }}
-          >
-            <a
-              href={f.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid={`form-link-${slug(f.label)}`}
-              style={{ display: "block" }}
-            >
-              <div
-                style={{
-                  fontFamily: "Newsreader, Georgia, serif",
-                  fontSize: "1.15rem",
-                  color: "var(--ink)",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                {f.label}
-              </div>
-              <div
-                style={{
-                  fontSize: "0.9rem",
-                  color: "var(--ink-mute)",
-                  marginBottom: "0.9rem",
-                }}
-              >
-                {f.note}
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  color: "var(--bronze-deep)",
-                  fontSize: "0.88rem",
-                  fontWeight: 500,
-                  borderBottom: "1px solid var(--cream-line)",
-                  paddingBottom: 2,
-                }}
-              >
-                <Download size={14} />
-                Download fillable PDF
-              </div>
-            </a>
-          </li>
+          <FormDownloadCard key={f.label} form={f} />
         ))}
       </ul>
       <p style={{ marginTop: "1.4rem", fontSize: "0.9rem", color: "var(--ink-mute)" }}>
