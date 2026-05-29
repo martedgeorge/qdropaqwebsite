@@ -34,7 +34,6 @@ function App() {
           <Route path="/our-process" element={<Process />} />
           <Route path="/unique" element={<Unique />} />
           <Route path="/fees-and-forms" element={<Fees />} />
-          <Route path="/who-we-are" element={<Team />} />
           <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/articles/what-is-a-qdro" element={<Article />} />
