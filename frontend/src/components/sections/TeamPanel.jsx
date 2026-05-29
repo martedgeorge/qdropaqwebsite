@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FadeIn from "@/components/FadeIn";
+import { TEAM_PANEL_IMAGE_HEIGHT, REVEAL_STAGGER_BASE } from "@/constants/ui";
 
 export default function TeamPanel() {
   return (
@@ -14,7 +15,7 @@ export default function TeamPanel() {
               data-testid="team-image"
               style={{
                 width: "100%",
-                height: 480,
+                height: TEAM_PANEL_IMAGE_HEIGHT,
                 objectFit: "cover",
                 borderRadius: 3,
                 filter: "saturate(0.9) contrast(0.96)",
@@ -23,7 +24,7 @@ export default function TeamPanel() {
           </FadeIn>
         </div>
         <div className="lg:col-span-6">
-          <FadeIn delay={80}>
+          <FadeIn delay={REVEAL_STAGGER_BASE}>
             <div className="eyebrow" style={{ marginBottom: "1rem" }}>Who you’ll work with</div>
             <h2 className="display-lg" style={{ marginBottom: "1.2rem", maxWidth: "20ch" }}>
               Direct access to the person preparing your order.

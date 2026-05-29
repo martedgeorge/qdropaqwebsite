@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
+import { TEAM_MEMBER_IMAGE_HEIGHT, REVEAL_STAGGER_BASE } from "@/constants/ui";
 
 const team = [
   {
@@ -33,14 +34,14 @@ export default function Team() {
       <section style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
         <div className="container-quiet grid grid-cols-1 md:grid-cols-2 gap-12">
           {team.map((m, i) => (
-            <FadeIn key={m.name} delay={i * 80}>
+            <FadeIn key={m.name} delay={i * REVEAL_STAGGER_BASE}>
               <article data-testid={`team-member-${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
                 <img
                   src={m.img}
                   alt={m.name}
                   style={{
                     width: "100%",
-                    height: 380,
+                    height: TEAM_MEMBER_IMAGE_HEIGHT,
                     objectFit: "cover",
                     borderRadius: 3,
                     filter: "saturate(0.85) contrast(0.96)",

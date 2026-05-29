@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { INTERSECTION_THRESHOLD, INTERSECTION_ROOT_MARGIN } from "@/constants/ui";
 
 // Gentle, restrained reveal — opacity + 8px translate, single pass, no springs.
 export default function FadeIn({ children, delay = 0, as: Tag = "div", className = "" }) {
@@ -10,14 +11,14 @@ export default function FadeIn({ children, delay = 0, as: Tag = "div", className
     if (!el) return;
     const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
             setTimeout(() => setVisible(true), delay);
             obs.unobserve(el);
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: INTERSECTION_THRESHOLD, rootMargin: INTERSECTION_ROOT_MARGIN }
     );
     obs.observe(el);
     return () => obs.disconnect();

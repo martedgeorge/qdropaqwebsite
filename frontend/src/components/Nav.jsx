@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-
-const links = [
-  { to: "/about", label: "About" },
-  { to: "/our-process", label: "Process" },
-  { to: "/unique", label: "What Makes Us Different" },
-  { to: "/fees-and-forms", label: "Fees & Forms" },
-  { to: "/who-we-are", label: "Who We Are" },
-  { to: "/contact", label: "Contact" },
-];
+import { NAV_HEIGHT, NAV_ICON_SIZE, SCROLL_SHADOW_THRESHOLD } from "@/constants/ui";
+import BrandMark from "@/components/nav/BrandMark";
+import { DesktopNavLinks, DesktopCta, MobileMenu } from "@/components/nav/NavLinks";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  // Close menu when route changes
   useEffect(() => { setOpen(false); }, [location.pathname]);
+
+  // Shadow on scroll
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_SHADOW_THRESHOLD);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -35,59 +32,10 @@ export default function Nav() {
         transition: "background-color 240ms ease, border-color 240ms ease",
       }}
     >
-      <div className="container-quiet flex items-center justify-between" style={{ height: 72 }}>
-        <Link to="/" data-testid="brand-mark" className="flex items-center gap-3">
-          <span
-            style={{
-              fontFamily: "Newsreader, Georgia, serif",
-              fontSize: "1.45rem",
-              fontWeight: 500,
-              letterSpacing: "0.01em",
-              color: "var(--ink)",
-            }}
-          >
-            QDROPAQ
-          </span>
-          <span
-            className="hidden sm:inline-block"
-            style={{
-              fontSize: "0.72rem",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "var(--ink-mute)",
-              borderLeft: "1px solid var(--cream-line)",
-              paddingLeft: "0.9rem",
-            }}
-          >
-            Est. 1995
-          </span>
-        </Link>
-
-        <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              data-testid={`nav-${l.to.replace(/\//g, "")}`}
-              style={({ isActive }) => ({
-                fontSize: "0.92rem",
-                color: isActive ? "var(--ink)" : "var(--ink-soft)",
-                borderBottom: isActive ? "1px solid var(--bronze)" : "1px solid transparent",
-                paddingBottom: 2,
-                transition: "color 200ms ease, border-color 200ms ease",
-              })}
-            >
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="hidden lg:block">
-          <Link to="/getting-started" data-testid="nav-cta-start" className="btn-primary">
-            Begin Intake
-          </Link>
-        </div>
-
+      <div className="container-quiet flex items-center justify-between" style={{ height: NAV_HEIGHT }}>
+        <BrandMark />
+        <DesktopNavLinks />
+        <DesktopCta />
         <button
           data-testid="mobile-menu-toggle"
           className="lg:hidden"
@@ -95,33 +43,11 @@ export default function Nav() {
           aria-label="Toggle menu"
           style={{ color: "var(--ink)" }}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={NAV_ICON_SIZE} /> : <Menu size={NAV_ICON_SIZE} />}
         </button>
       </div>
 
-      {open && (
-        <div
-          className="lg:hidden"
-          data-testid="mobile-menu"
-          style={{ background: "var(--ivory)", borderTop: "1px solid var(--cream-line)" }}
-        >
-          <div className="container-quiet py-5 flex flex-col gap-4">
-            {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                data-testid={`mobile-nav-${l.to.replace(/\//g, "")}`}
-                style={{ fontSize: "1rem", color: "var(--ink-soft)" }}
-              >
-                {l.label}
-              </NavLink>
-            ))}
-            <Link to="/getting-started" data-testid="mobile-nav-cta-start" className="btn-primary mt-2">
-              Begin Intake
-            </Link>
-          </div>
-        </div>
-      )}
+      {open && <MobileMenu />}
     </header>
   );
 }
