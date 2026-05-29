@@ -6,7 +6,7 @@ const PRACTICE_LINKS = [
   { to: "/about", label: "About", testid: "footer-about" },
   { to: "/our-process", label: "Our Process", testid: "footer-process" },
   { to: "/unique", label: "What Makes Us Different", testid: "footer-unique" },
-  { to: "/who-we-are", label: "Who We Are", testid: "footer-team" },
+ 
 ];
 
 const CLIENT_LINKS = [
