@@ -2,7 +2,7 @@
 // Shared navigation link definitions.
 
 export const NAV_LINKS = [
-  { to: "/about", label: "TEST123" },
+  { to: "/about", label: "About" },
   { to: "/our-process", label: "Process" },
   { to: "/unique", label: "Why QDROPAQ" },
   { to: "/fees-and-forms", label: "Fees & Forms" },
