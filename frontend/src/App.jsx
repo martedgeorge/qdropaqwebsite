@@ -204,37 +204,44 @@ function App() {
         </section>
 
         <section id="contact" className="section contact">
-          <div>
-            <p className="eyebrow">Get Started</p>
-            <h2>Ready to move forward?</h2>
-            <p>
-              Reach out to QDROPAQ for professional QDRO preparation and retirement plan valuation support.
-            </p>
-            <p className="disclaimer">
-              QDROPAQ provides retirement valuation and QDRO preparation support. QDROPAQ is not a law firm and does not provide legal advice.
-            </p>
-          </div>
+  <div className="contactIntro">
+    <p className="eyebrow">Contact QDROPAQ</p>
+    <h2>Start your QDRO or retirement valuation request.</h2>
+    <p>
+      Send QDROPAQ your information and a brief description of what you need help with.
+    </p>
+  </div>
 
-          <div className="contactCard">
-            <p><strong>Email:</strong> <a href="mailto:carol@qdropaq.com">carol@qdropaq.com</a></p>
-            <p><strong>Phone:</strong> <a href="tel:2157829847">(215) 782-9847</a></p>
+  <div className="contactLayout">
+    <div className="contactInfo">
+      <p><strong>Email:</strong><br /> <a href="mailto:carol@qdropaq.com">carol@qdropaq.com</a></p>
+      <p><strong>Phone:</strong><br /> <a href="tel:2157829847">(215) 782-9847</a></p>
 
-            <form className="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-              <input type="text" name="name" placeholder="Your name" required />
-              <input type="email" name="email" placeholder="Your email" required />
-              <input type="tel" name="phone" placeholder="Your phone number" />
-              <select name="service" defaultValue="">
-                <option value="" disabled>What do you need help with?</option>
-                <option>QDRO Preparation</option>
-                <option>Retirement Plan Valuation</option>
-                <option>Pension Division Question</option>
-                <option>Not Sure Yet</option>
-              </select>
-              <textarea name="message" placeholder="Tell us what you need help with" rows="5" required></textarea>
-              <button type="submit">Submit Request</button>
-            </form>
-          </div>
-        </section>
+      <p className="disclaimer">
+        QDROPAQ provides retirement valuation and QDRO preparation support. QDROPAQ is not a law firm and does not provide legal advice.
+      </p>
+    </div>
+
+    <div className="contactCard">
+      <form className="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <input type="tel" name="phone" placeholder="Your phone number" />
+
+        <select name="service" defaultValue="">
+          <option value="" disabled>What do you need help with?</option>
+          <option>QDRO Preparation</option>
+          <option>Retirement Plan Valuation</option>
+          <option>Pension Division Question</option>
+          <option>Not Sure Yet</option>
+        </select>
+
+        <textarea name="message" placeholder="Tell us what you need help with" rows="7" required></textarea>
+        <button type="submit">Submit Request</button>
+      </form>
+    </div>
+  </div>
+</section>
       </main>
 
       <footer>
