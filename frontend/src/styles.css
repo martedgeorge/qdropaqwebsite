@@ -621,3 +621,119 @@ ul {
     align-items: flex-start;
   }
 }
+.trustLine {
+  color: var(--purple);
+  font-weight: 800;
+  border-left: 5px solid var(--orange);
+  padding-left: 16px;
+  margin: 22px 0;
+}
+
+.sectionIntro {
+  max-width: 850px;
+  color: var(--black);
+}
+
+.threeCards {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.simpleCard {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 26px;
+}
+
+.simpleCard h3 {
+  margin: 0;
+}
+
+.checkMark {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: var(--orange);
+  color: white;
+  border-radius: 6px;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.whyHireSection {
+  background: var(--cream);
+}
+
+.plansSection {
+  background: var(--purple);
+}
+
+.plansSection h2 {
+  color: white;
+  max-width: 950px;
+}
+
+.planCard {
+  background: white;
+  border-top: 6px solid var(--orange);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.planCard h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.workWithSection {
+  background: white;
+}
+
+.processPreview {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+  background: var(--cream);
+}
+
+.processPreviewList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: 10px;
+}
+
+.processPreviewList li {
+  counter-increment: step;
+  background: white;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--orange);
+  border-radius: 8px;
+  padding: 18px 20px;
+  color: var(--black);
+  font-weight: 750;
+}
+
+.processPreviewList li::before {
+  content: counter(step);
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  background: var(--purple);
+  color: white;
+  border-radius: 6px;
+  margin-right: 12px;
+  font-weight: 900;
+}
+
+@media (max-width: 980px) {
+  .threeCards,
+  .processPreview {
+    grid-template-columns: 1fr;
+  }
+}
