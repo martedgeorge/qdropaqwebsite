@@ -650,3 +650,26 @@ ul { padding-left: 20px; }
     align-items: flex-start;
   }
 }
+.contactTrust {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,.25);
+}
+
+.contactTrust h3 {
+  color: white;
+  margin-bottom: 18px;
+}
+
+.contactTrust ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contactTrust li {
+  color: white;
+  margin-bottom: 12px;
+  font-weight: 700;
+  opacity: .95;
+}
