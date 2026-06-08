@@ -786,3 +786,68 @@ ul { padding-left: 20px; }
     grid-template-columns: 1fr;
   }
 }
+.resourceIntroBlock {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 50px;
+  align-items: start;
+  background: var(--cream);
+}
+
+.resourceIntroBlock p {
+  font-size: 19px;
+  color: var(--black);
+}
+
+.resourcesPage {
+  background: white;
+  display: grid;
+  gap: 80px;
+}
+
+.resourceGroupHeader {
+  max-width: 900px;
+  margin-bottom: 30px;
+}
+
+.resourceGroupHeader h2 {
+  margin-bottom: 12px;
+}
+
+.resourceGroupHeader p {
+  max-width: 760px;
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.resourceCard {
+  background: white;
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--orange);
+  border-radius: 16px;
+  padding: 30px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.resourceCard h3 {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.resourceCard p {
+  flex: 1;
+  font-size: 16px;
+}
+
+@media (max-width: 980px) {
+  .resourceIntroBlock,
+  .resourceGrid {
+    grid-template-columns: 1fr;
+  }
+}
