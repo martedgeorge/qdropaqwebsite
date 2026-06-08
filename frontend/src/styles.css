@@ -730,3 +730,59 @@ ul { padding-left: 20px; }
     grid-column: auto;
   }
 }
+.resourcesPage {
+  background: #fff;
+}
+
+.resourceIntro {
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.resourceIntro p {
+  font-size: 19px;
+  color: var(--black);
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.resourceCard {
+  background: white;
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--orange);
+  border-radius: 18px;
+  padding: 28px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.resourceCategory {
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 11px;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.resourceCard h2 {
+  font-size: 26px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.resourceCard p {
+  font-size: 16px;
+  flex: 1;
+}
+
+@media (max-width: 980px) {
+  .resourceGrid {
+    grid-template-columns: 1fr;
+  }
+}
