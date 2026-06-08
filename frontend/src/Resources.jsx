@@ -1,7 +1,7 @@
 const articleGroups = [
   {
     category: 'QDRO & Retirement Plans',
-    description: 'Articles explaining retirement plan division, QDROs, and defined contribution plans.',
+    intro: 'Clear explanations of retirement plan division, QDROs, and account-based plans.',
     articles: [
       ['Defined Contribution Plans in Divorce', '/articles/Defined-Contribution-Plan.html'],
       ['Marital Portion of Pensions', '/articles/Marital-portion-of-pensio.html'],
@@ -10,8 +10,8 @@ const articleGroups = [
     ]
   },
   {
-    category: 'Pension Valuation Issues',
-    description: 'Resources on pension values, retirement age, cost-of-living adjustments, and benefit formulas.',
+    category: 'Pension Valuation',
+    intro: 'Articles on pension values, retirement age, benefit formulas, COLAs, and present value issues.',
     articles: [
       ['Cost of Living Adjustment in Pension Division', '/articles/Cost-of-Living-Adjustment.html'],
       ['Formula Enhancements to a Defined Benefit Pension', '/articles/Formula-Enhancements-to-a.html'],
@@ -20,8 +20,8 @@ const articleGroups = [
     ]
   },
   {
-    category: 'Advanced Divorce & Benefit Topics',
-    description: 'More complex issues involving military benefits, disability, Social Security offsets, and delayed retirement.',
+    category: 'Advanced Divorce Issues',
+    intro: 'More complex topics involving military retirement, disability, Social Security offsets, and delayed retirement.',
     articles: [
       ['Military Retirement Disability Issues', '/articles/The-Disability-Issue-in-the-Distribution-of-Military.html'],
       ['Disability Payments as Marital Property', '/articles/Reconciling-Mixed-Signals.html'],
@@ -36,24 +36,32 @@ const articleGroups = [
 export default function Resources() {
   return (
     <>
-      <section className="pageHero">
+      <section className="resourcesHero">
         <p className="eyebrow">Resource Library</p>
         <h1>QDRO & Pension Division Articles</h1>
-        <p className="pageLead">
-          Educational articles on retirement division, pension valuation, QDROs,
+        <p>
+          Educational articles from QDROPAQ on pensions, QDROs, retirement valuation,
           survivor benefits, and complex divorce-related financial issues.
         </p>
       </section>
 
-      <section className="section resourceIntroBlock">
+      <section className="resourceAuthority">
         <div>
-          <p className="eyebrow">Expert Guidance</p>
-          <h2>Learn from pension and QDRO professionals.</h2>
+          <strong>30+ Years</strong>
+          <span>Experience</span>
         </div>
-        <p>
-          These resources help clients, attorneys, mediators, and financial professionals
-          better understand the retirement issues that can arise during divorce.
-        </p>
+        <div>
+          <strong>12,000+</strong>
+          <span>QDROs Drafted</span>
+        </div>
+        <div>
+          <strong>30,000+</strong>
+          <span>Valuations Performed</span>
+        </div>
+        <div>
+          <strong>Published</strong>
+          <span>Pension Experts</span>
+        </div>
       </section>
 
       <section className="section resourcesPage">
@@ -62,18 +70,22 @@ export default function Resources() {
             <div className="resourceGroupHeader">
               <p className="eyebrow">{group.category}</p>
               <h2>{group.category}</h2>
-              <p>{group.description}</p>
+              <p>{group.intro}</p>
             </div>
 
             <div className="resourceGrid">
               {group.articles.map(([title, link]) => (
                 <article className="resourceCard" key={title}>
-                  <h3>{title}</h3>
-                  <p>
-                    Read this article from QDROPAQ’s pension and retirement
-                    division resource library.
-                  </p>
-                  <a className="textLink" href={link} target="_blank" rel="noreferrer">
+                  <div>
+                    <span className="resourceTag">{group.category}</span>
+                    <h3>{title}</h3>
+                    <p>
+                      Learn more about this retirement division issue and how it may
+                      affect pension valuation, QDRO preparation, or divorce settlement planning.
+                    </p>
+                  </div>
+
+                  <a href={link} target="_blank" rel="noreferrer">
                     Read Article →
                   </a>
                 </article>
@@ -82,7 +94,6 @@ export default function Resources() {
           </div>
         ))}
       </section>
-      
     </>
   );
 }
