@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+
 import Layout from './components/Layout.jsx';
+
 import Home from './pages/Home.jsx';
 import WhoWeAre from './pages/WhoWeAre.jsx';
 import WhyQdropaq from './pages/WhyQdropaq.jsx';
@@ -7,6 +9,7 @@ import Process from './pages/Process.jsx';
 import FAQ from './pages/FAQ.jsx';
 import Contact from './pages/Contact.jsx';
 import WhoWeServe from './pages/WhoWeServe.jsx';
+import Resources from './pages/Resources.jsx';
 
 export default function App() {
   return (
@@ -19,6 +22,7 @@ export default function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/who-we-serve" element={<WhoWeServe />} />
+        <Route path="/resources" element={<Resources />} />
       </Route>
     </Routes>
   );
