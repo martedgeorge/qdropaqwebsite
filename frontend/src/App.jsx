@@ -9,7 +9,7 @@ import Process from './pages/Process.jsx';
 import FAQ from './pages/FAQ.jsx';
 import Contact from './pages/Contact.jsx';
 import WhoWeServe from './pages/WhoWeServe.jsx';
-import Resources from './pages/Resources.jsx';
+import Resources from './Resources.jsx';
 
 export default function App() {
   return (
