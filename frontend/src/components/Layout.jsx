@@ -10,7 +10,7 @@ export default function Layout() {
         </Link>
 
         <nav className="siteNav">
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">Hoe</NavLink>
 
           <NavLink to="/overview">
             Overview
