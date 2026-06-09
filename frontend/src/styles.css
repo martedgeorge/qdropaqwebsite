@@ -802,3 +802,48 @@ li {
     border-radius: 14px;
   }
 }
+/* FINAL POLISH OVERRIDES */
+
+.siteHeader {
+  min-height: 128px;
+  padding: 18px 6vw;
+}
+
+.brand img {
+  height: 135px;
+  width: auto;
+}
+
+.siteNav {
+  gap: 20px;
+  font-size: 15px;
+}
+
+h1 {
+  font-size: clamp(42px, 5vw, 70px);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(30px, 3.4vw, 48px);
+}
+
+h3 {
+  font-size: 24px;
+}
+
+.articleCard h2,
+.resourceCard h2,
+.articleDirectoryCard h3 {
+  font-size: clamp(26px, 2.4vw, 38px);
+}
+
+.articleCard {
+  padding: 36px;
+  border-left: 6px solid var(--orange);
+}
+
+.dropdownMenu a {
+  white-space: normal;
+  line-height: 1.25;
+}
