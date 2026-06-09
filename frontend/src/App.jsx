@@ -10,7 +10,7 @@ import FAQ from './pages/FAQ.jsx';
 import Contact from './pages/Contact.jsx';
 import WhoWeServe from './pages/WhoWeServe.jsx';
 import Resources from './Resources.jsx';
-
+import ArticlePage from './pages/ArticlePage.jsx';
 import Services from './pages/Services.jsx';
 import Staff from './pages/Staff.jsx';
 import Library from './pages/Library.jsx';
