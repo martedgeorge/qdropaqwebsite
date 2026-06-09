@@ -13,76 +13,118 @@ export default function Home() {
     <>
       <section className="homeHero">
         <div className="heroCopy">
-          <p className="eyebrow">QDRO Preparation & Retirement Plan Valuations</p>
-          <h1>Need a QDRO But Don’t Have a Lawyer?</h1>
+          <p className="eyebrow">QDROPAQ</p>
+
+          <h1>Pension valuation and QDRO preparation for divorce matters.</h1>
 
           <p className="lead">
-            Professional QDRO preparation and retirement plan valuations for self-represented divorce clients and mediated settlements.
+            QDROPAQ helps self-represented clients, mediators, attorneys, and financial professionals divide retirement benefits with clarity and care.
           </p>
 
           <p>
-            Retirement assets are often the largest financial asset divided in divorce. A mistake can lead to delays, unexpected taxes, lost benefits, or costly future disputes.
+            Retirement assets are often one of the most important financial issues in divorce. We provide specialized support for QDRO preparation, pension valuation, and retirement plan division.
           </p>
 
-          <div className="trustLine">
-            Over 30 Years Experience • 12,000+ QDROs Drafted • 30,000+ Valuations Performed • Zero Liability Claims
-          </div>
-
           <div className="buttonRow">
-            <Link className="button primary" to="/contact">Start Your QDRO Today</Link>
-            <Link className="button secondary" to="/process">Learn About Our Process</Link>
+            <Link className="button primary" to="/contact">Start a Request</Link>
+            <Link className="button secondary" to="/services">View Services</Link>
           </div>
         </div>
 
-        <aside className="heroAuthorityCard">
-          <img src={`${A}fanned-books.jpg`} alt="QDROPAQ benchmark pension and QDRO books" />
-          <div>
-            <p className="eyebrow light">Published Authority</p>
-            <h2>We Wrote the Books.</h2>
-            <p>
-              Benchmark pension and QDRO treatises authored and co-authored by QDROPAQ experts.
-            </p>
+        <aside className="heroAuthorityCard quietCard">
+          <p className="eyebrow light">Professional Experience</p>
+          <h2>Technical knowledge for complex retirement division.</h2>
+          <p>
+            QDROPAQ combines decades of pension valuation experience, published authority, and practical support throughout the process.
+          </p>
+
+          <div className="miniStats">
+            {stats.map(([number, label]) => (
+              <div key={label}>
+                <strong>{number}</strong>
+                <span>{label}</span>
+              </div>
+            ))}
           </div>
         </aside>
       </section>
 
-      <section className="statsBand">
-        {stats.map(([number, label]) => (
-          <div className="stat" key={label}>
-            <strong>{number}</strong>
-            <span>{label}</span>
+      <section className="section overviewSection">
+        <div>
+          <p className="eyebrow">Overview</p>
+          <h2>Focused retirement division support.</h2>
+        </div>
+
+        <div>
+          <p>
+            QDROPAQ provides professional QDRO preparation and pension valuation services for divorce-related retirement matters. The work is technical, plan-specific, and often time-sensitive.
+          </p>
+
+          <p>
+            Our role is to help clients understand what documents are needed, how the process works, and how retirement orders and valuations fit into the larger divorce settlement.
+          </p>
+
+          <Link className="textLink" to="/overview">Learn more about QDROPAQ →</Link>
+        </div>
+      </section>
+
+      <section className="section servicesPreview">
+        <div className="sectionHeadingRow">
+          <div>
+            <p className="eyebrow">Services</p>
+            <h2>Specialized services for retirement division.</h2>
           </div>
-        ))}
+
+          <Link className="button secondary" to="/services">All Services</Link>
+        </div>
+
+        <div className="servicePreviewGrid">
+          <Link className="servicePreviewCard" to="/services">
+            <h3>QDRO Preparation</h3>
+            <p>Custom retirement division orders prepared for plan review and court certification.</p>
+          </Link>
+
+          <Link className="servicePreviewCard" to="/services">
+            <h3>Pension Valuations</h3>
+            <p>Professional valuation support for defined benefit plans, federal pensions, military pensions, and related benefits.</p>
+          </Link>
+
+          <Link className="servicePreviewCard" to="/services">
+            <h3>Consulting Support</h3>
+            <p>Support for attorneys, mediators, financial professionals, and self-represented clients.</p>
+          </Link>
+        </div>
       </section>
 
       <section className="section bookFeature">
-        <img src={`${A}fanned-books.jpg`} alt="Published QDRO and pension books" />
-
         <div>
-          <p className="eyebrow">National Standard-Setting Experience</p>
-          <h2>Authors of Benchmark Pension & QDRO Treatises</h2>
+          <p className="eyebrow">Published Authority</p>
+          <h2>Authors of benchmark pension and QDRO treatises.</h2>
 
           <p>
-            These benchmark works by Mark K. Altschuler, QDROPAQ Actuary, establish national standards for assessing and distributing retirement plans in divorce.
+            Mark K. Altschuler has authored and co-authored nationally recognized works on pension valuation, divorce, and retirement benefit division.
           </p>
 
           <ul className="featureList">
-            {publications.map((item) => (
+            {publications.slice(0, 5).map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
 
-          <Link className="textLink" to="/who-we-are">View credentials and affiliations</Link>
+          <Link className="textLink" to="/staff">Meet the team →</Link>
         </div>
+
+        <img src={`${A}fanned-books.jpg`} alt="Published QDRO and pension books" />
       </section>
 
-      <section className="section plansSection">
+      <section className="section plansSection quietPurple">
         <div className="sectionHeadingRow">
           <div>
             <p className="eyebrow light">Plans We Handle</p>
-            <h2>Experience with a wide range of retirement plans and benefit structures.</h2>
+            <h2>Experience with many retirement plan types.</h2>
           </div>
-          <Link className="button whiteButton" to="/faq">Read Common Questions</Link>
+
+          <Link className="button whiteButton" to="/fees-forms">Forms & Requests</Link>
         </div>
 
         <div className="planGrid">
@@ -92,58 +134,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section whyChooseSection">
-        <p className="eyebrow light">Why Clients Choose QDROPAQ</p>
-        <h2>Specialized expertise every step of the way.</h2>
-
-        <div className="grid fourCards">
-          <article className="colorCard white">
-            <h3>Accurate Valuations</h3>
-            <p>
-              Proprietary valuation tools, hand calculations, and actuarial experience for complex retirement divisions.
-            </p>
-          </article>
-
-          <article className="colorCard white">
-            <h3>Custom Drafted Orders</h3>
-            <p>
-              No generic templates. Each order is drafted for the plan, the parties’ agreement, and applicable requirements.
-            </p>
-          </article>
-
-          <article className="colorCard white">
-            <h3>Plan Pre-Approval Focus</h3>
-            <p>
-              Pre-approval helps confirm that the plan can accept the order once court-certified.
-            </p>
-          </article>
-
-          <article className="colorCard white">
-            <h3>Real Human Support</h3>
-            <p>
-              Phone and email support from knowledgeable professionals throughout the process.
-            </p>
-          </article>
-        </div>
-      </section>
-
       <section className="section processPreview">
         <div>
-          <p className="eyebrow">Process Preview</p>
+          <p className="eyebrow">Process</p>
           <h2>A clear path from intake to completion.</h2>
 
           <p>
-            QDROPAQ uses a focused process designed to move efficiently while addressing plan requirements, court certification, and final plan implementation.
+            QDROPAQ uses a structured process designed to address plan requirements, court certification, and final submission.
           </p>
 
-          <Link className="button secondary" to="/process">View Full 7-Step Process</Link>
+          <Link className="button secondary" to="/process">View Process</Link>
         </div>
 
         <ol className="processPreviewList">
-          {processSteps.map((step) => (
+          {processSteps.slice(0, 5).map((step) => (
             <li key={step.title}>{step.title}</li>
           ))}
         </ol>
+      </section>
+
+      <section className="section resourceHomePreview">
+        <div>
+          <p className="eyebrow">Library</p>
+          <h2>Articles and resources on pension division.</h2>
+          <p>
+            Browse QDROPAQ’s resource library for articles on QDROs, survivor benefits, pension valuation, Social Security offsets, and related divorce issues.
+          </p>
+        </div>
+
+        <Link className="button primary" to="/resources">View Resource Library</Link>
       </section>
 
       <section className="section affiliationPreview">
@@ -162,7 +181,8 @@ export default function Home() {
       <section className="ctaBand">
         <div>
           <p className="eyebrow light">Get Started</p>
-          <h2>Protect Your Retirement. Protect Your Future.</h2>
+          <h2>Have a QDRO or pension valuation question?</h2>
+          <p>Contact Carol Altschuler to begin the intake process.</p>
         </div>
 
         <Link className="button primary" to="/contact">Contact QDROPAQ</Link>
