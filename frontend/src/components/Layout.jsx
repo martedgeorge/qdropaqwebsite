@@ -65,28 +65,16 @@ export default function Layout() {
           <div className="navDropdown">
             <button>Library</button>
 
-            <div className="dropdownMenu">
-              <Link to="/resources">
-                Articles
-              </Link>
+            <div className="navDropdown">
+  <button>Resources</button>
 
-              <Link to="/faq">
-                Div Tips
-              </Link>
-
-              <Link to="/library">
-                Our Aspen Press Text Books
-              </Link>
-
-              <Link to="/library">
-                Learn About Pensions
-              </Link>
-
-              <Link to="/library">
-                Methods & Standards
-              </Link>
-            </div>
-          </div>
+  <div className="dropdownMenu">
+    <Link to="/resources">Articles</Link>
+    <Link to="/resources">Military, Federal & Public Systems</Link>
+    <Link to="/resources">PAC's List</Link>
+    <Link to="/resources">Helpful Links</Link>
+  </div>
+</div>
 
           <div className="navDropdown">
             <button>Resources</button>
