@@ -76,47 +76,79 @@ export default function Layout() {
   </div>
 </div>
 
-          <div className="navDropdown">
-            <button>Resources</button>
+<nav className="siteNav">
+  <NavLink to="/">Home</NavLink>
 
-            <div className="dropdownMenu">
-              <Link to="/resources">
-                Military, Federal & Public Systems
-              </Link>
+  <NavLink to="/overview">
+    Overview
+  </NavLink>
 
-              <Link to="/resources">
-                PAC's List
-              </Link>
+  <div className="navDropdown">
+    <button>Services</button>
 
-              <Link to="/resources">
-                Helpful Links
-              </Link>
-            </div>
-          </div>
+```
+<div className="dropdownMenu">
+  <Link to="/services">Pension Valuations</Link>
+  <Link to="/services">QDROs</Link>
+  <Link to="/services">Employment Group Pension Expertise</Link>
+  <Link to="/services">Expert Testimony</Link>
+  <Link to="/services">Wage Loss</Link>
+  <Link to="/services">Legal Language Consulting</Link>
+  <Link to="/services">Stock Options</Link>
+  <Link to="/services">Personalized Actuarial Consulting</Link>
+  <Link to="/services">Speaker & CLE Presenter</Link>
+</div>
+```
 
-          <div className="navDropdown">
-            <button>Fees & Forms</button>
+  </div>
 
-            <div className="dropdownMenu">
-              <Link to="/fees-forms">
-                Pension Valuation Form
-              </Link>
+  <NavLink to="/staff">
+    Staff
+  </NavLink>
 
-              <Link to="/fees-forms">
-                QDRO Form
-              </Link>
+  <NavLink to="/resources">
+    Articles
+  </NavLink>
 
-              <Link to="/fees-forms">
-                Pro Se QDRO Form
-              </Link>
-            </div>
-          </div>
+  <div className="navDropdown">
+    <button>Resources</button>
 
-          <NavLink
-            to="/contact"
-            className="navButton"
-          >
-            Contact Us
+```
+<div className="dropdownMenu">
+  <Link to="/resources">Military, Federal & Public Systems</Link>
+  <Link to="/resources">PAC's List</Link>
+  <Link to="/resources">Helpful Links</Link>
+</div>
+```
+
+  </div>
+
+  <div className="navDropdown">
+    <button>Fees & Forms</button>
+
+```
+<div className="dropdownMenu">
+  <Link to="/fees-forms">Pension Valuation Form</Link>
+  <Link to="/fees-forms">QDRO Form</Link>
+  <Link to="/fees-forms">Pro Se QDRO Form</Link>
+</div>
+```
+
+  </div>
+
+<NavLink
+to="/contact"
+className="navButton"
+
+>
+
+```
+Contact Us
+```
+
+  </NavLink>
+</nav>
+
           </NavLink>
         </nav>
       </header>
