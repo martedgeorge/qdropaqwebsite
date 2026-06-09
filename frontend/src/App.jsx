@@ -29,7 +29,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/who-we-serve" element={<WhoWeServe />} />
         <Route path="/resources" element={<Resources />} />
-
+<Route path="/articles/age-patterns-in-divorce" element={<ArticlePage />} />
         <Route path="/services" element={<Services />} />
         <Route path="/staff" element={<Staff />} />
         <Route path="/library" element={<Library />} />
