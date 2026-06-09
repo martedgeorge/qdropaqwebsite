@@ -116,6 +116,14 @@ return (
           (215) 782-9847
         </a>
       </p>
+
+      <p>
+        <strong>Address</strong>
+        <br />
+        1657 The Fairway #169
+        <br />
+        Jenkintown, PA 19046
+      </p>
     </div>
 
     <div className="footerDisclaimer">
@@ -136,4 +144,3 @@ return (
 
 );
 }
-
