@@ -1,76 +1,50 @@
 import { Link } from 'react-router-dom';
 
+const articles = [
+  {
+    title: 'Age Patterns in Divorce',
+    description:
+      'An actuarial look at age patterns in divorce using pension-related divorce data.',
+    link: '/articles/age-patterns-in-divorce'
+  },
+  {
+    title: 'Defined Contribution Plans in Divorce',
+    description:
+      'Explains how account-based retirement plans may be handled during divorce.',
+    link: '/articles/defined-contribution-plans-in-divorce'
+  },
+  {
+    title: 'Survivor Annuity is a Marital Asset',
+    description:
+      'Discusses survivor benefits and why they may matter in pension division.',
+    link: '/articles/survivor-annuity-is-a-marital-asset'
+  }
+];
+
 export default function Resources() {
   return (
     <>
       <section className="resourcesHero">
-        <p className="eyebrow">Resource Center</p>
-        <h1>QDRO & Pension Division Library</h1>
+        <p className="eyebrow">Articles</p>
+        <h1>QDRO & Pension Division Articles</h1>
         <p>
-          A professional resource library for articles, divorce tips, pension education,
-          and retirement division guidance.
+          Browse QDROPAQ’s educational articles on pensions, QDROs,
+          retirement valuation, survivor benefits, and divorce-related
+          financial issues.
         </p>
       </section>
 
-      <section className="section libraryLayout">
-        <aside className="librarySidebar">
-          <h3>QDROPAQ Resource Library</h3>
-
-          <div className="sideGroup">
-            <h4>Library</h4>
-            <a href="#articles">Articles</a>
-            <Link to="/faq">Div Tips</Link>
-            <Link to="/library">Learn About Pensions</Link>
-          </div>
-
-          <div className="sideGroup">
-            <h4>Get Started</h4>
-            <Link to="/contact">Contact QDROPAQ</Link>
-            <Link to="/fees-forms">Fees & Forms</Link>
-          </div>
-        </aside>
-
-        <main className="libraryMain">
-          <section className="resourceSection" id="articles">
-            <div className="libraryIntro">
-              <p className="eyebrow">Articles</p>
-              <h2>Articles</h2>
-              <p>
-                Educational articles on pensions, QDROs, retirement valuation,
-                and divorce-related financial issues.
-              </p>
-            </div>
-
-            <div className="articleDirectory">
-              <Link
-                className="articleDirectoryCard"
-                to="/articles/age-patterns-in-divorce"
-              >
-                <span>Articles</span>
-                <h3>Age Patterns in Divorce</h3>
-                <p>
-                  View this resource for more information about retirement division,
-                  pensions, QDROs, and divorce-related financial issues.
-                </p>
-                <strong>Open Resource →</strong>
-              </Link>
-
-              <a className="articleDirectoryCard" href="/articles/Cost-of-Living-Adjustment.html">
-                <span>Articles</span>
-                <h3>Cost of Living Adjustment in Pension Division</h3>
-                <p>Temporary old article link until this page is converted.</p>
-                <strong>Open Resource →</strong>
-              </a>
-
-              <a className="articleDirectoryCard" href="/articles/Defined-Contribution-Plan.html">
-                <span>Articles</span>
-                <h3>Defined Contribution Plans in Divorce</h3>
-                <p>Temporary old article link until this page is converted.</p>
-                <strong>Open Resource →</strong>
-              </a>
-            </div>
-          </section>
-        </main>
+      <section className="section articleDirectory">
+        {articles.map((article) => (
+          <article className="articleDirectoryCard" key={article.title}>
+            <span>Article</span>
+            <h3>{article.title}</h3>
+            <p>{article.description}</p>
+            <Link className="textLink" to={article.link}>
+              Read Full Article →
+            </Link>
+          </article>
+        ))}
       </section>
     </>
   );
