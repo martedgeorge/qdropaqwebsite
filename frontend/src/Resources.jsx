@@ -3,7 +3,7 @@ const articleGroups = [
     title: 'Articles',
     description: 'Educational articles on pensions, QDROs, retirement valuation, and divorce-related financial issues.',
     links: [
-      ['Age Patterns in Divorce', '/articles/Age-Patterns-in-Divorce.html'],
+      ['/articles/age-patterns-in-divorce'],
       ['Cost of Living Adjustment in Pension Division', '/articles/Cost-of-Living-Adjustment.html'],
       ['Defined Contribution Plans in Divorce', '/articles/Defined-Contribution-Plan.html'],
       ['Early Retirement Window Enhancements', '/articles/Early-Retirement-Window-E.html'],
