@@ -143,7 +143,7 @@ className="navButton"
 >
 
 ```
-Contact test
+Contact Us
 ```
 
   </NavLink>
