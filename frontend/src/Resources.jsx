@@ -44,7 +44,6 @@ export default function Resources() {
 return (
 <> <section className="resourcesHero"> <p className="eyebrow">Library</p>
 
-```
     <h1>QDRO & Pension Division Articles</h1>
 
     <p>
@@ -81,7 +80,6 @@ return (
     ))}
   </section>
 </>
-```
 
 );
 }

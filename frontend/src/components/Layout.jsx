@@ -6,7 +6,6 @@ return (
 <> <header className="siteHeader"> <Link className="brand" to="/">
 <img src={`${A}logo-2026.png`} alt="QDROPAQ" /> </Link>
 
-```
     <nav className="siteNav">
       <NavLink to="/">Home</NavLink>
 
@@ -140,7 +139,6 @@ return (
     </div>
   </footer>
 </>
-```
 
 );
 }
